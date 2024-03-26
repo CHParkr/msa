@@ -1,0 +1,49 @@
+logging:
+  file:
+    name: logs/api-local.log
+    max-size: 500MB
+    max-history: 10
+  level:
+    root: info
+    org.msa.item: debug
+    
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:53306/msa?characterEncoding=UTF-8
+    username: msa
+    password: '{cipher}75513d30417aff430cb8a322b6d22dac49a0a891a61657fc2890dedfd5686023'
+  jpa:
+    database-platform: org.hibernate.dialect.MySQL8Dialect
+    show-sql: true
+    open-in-view: false
+    hibernate:
+      format_sql: true
+      ddl-auto: create
+
+# API 정의
+springdoc:
+  default-consumes-media-type: application/json
+  default-produces-media-type: application/json
+  swagger-ui:
+    operations-sorter: alpha
+    tags-sorter: alpha                                                               # 알파벳순 오름차순
+    path: /swagger-ui/index.html                                                     # 출력할 html
+    disable-swagger-default-url: true                                                # petstore html 활성화
+    display-query-params-without-oauth2: true                                        # URL 쿼리매개변수를 이용해서 swagger-ui에 대한 처리 활성화
+
+# 비밀번호 복호화   
+token:
+  expiration_time: 86400000
+  secret: SECU100
+  
+# 마이크로서비스 등록
+eureka:
+  instance:
+    instance-id: ${spring.cloud.client.hostname}:${spring.application.instance_id:${random.value}} # 인스턴스 ID 규칙 생성
+    prefer-ip-address: true                                                          # IP주소를 이용하여 eureka 서버등록
+  client:
+    register-with-eureka: true                                                       # eureka에 등록여부
+    fetch-registry: true                                                             # registry에 저장된 내용을 캐시해서 출력여부
+    service-url:
+      defaultZone: http://localhost:8761/eureka/

@@ -1,0 +1,62 @@
+plugins {
+	id 'java'
+	id 'org.springframework.boot' version '3.2.3'
+	id 'io.spring.dependency-management' version '1.1.4'
+}
+
+group = 'org.msa'
+version = '0.0.1-SNAPSHOT'
+
+java {
+	sourceCompatibility = '17'
+}
+
+/*compileJava {
+    options.compilerArgs << "-parameters"
+}*/
+
+configurations {
+	compileOnly {
+		extendsFrom annotationProcessor
+	}
+}
+
+repositories {
+	mavenCentral()
+}
+
+ext {
+	set('springCloudVersion', "2023.0.0")
+}
+
+dependencies {
+	// DB JPA
+	implementation 'org.springframework.boot:spring-boot-starter-validation'
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	implementation 'com.mysql:mysql-connector-j'
+	
+	// 
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	//implementation 'org.springdoc:springdoc-openapi-ui:1.6.14' // Spring Boot 3 이전
+	implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.0.2' // Spring Boot 3 이후
+	
+	// Config Server
+	implementation 'org.springframework.cloud:spring-cloud-starter-config:4.1.0'
+	implementation 'org.springframework.cloud:spring-cloud-starter-bootstrap:4.1.1'
+	
+	// 애플리케이션 상태나 정보 확인
+	implementation 'org.springframework.boot:spring-boot-starter-actuator'
+	
+	// Eureka client
+	implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client:4.1.0'
+	
+	compileOnly 'org.projectlombok:lombok'
+	annotationProcessor 'org.projectlombok:lombok'
+	developmentOnly 'org.springframework.boot:spring-boot-devtools'
+	annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+}
+
+tasks.named('test') {
+	useJUnitPlatform()
+}

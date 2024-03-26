@@ -1,0 +1,31 @@
+logging:
+  file:
+    name: logs/eureka.log
+    max-size: 500MB
+    max-history: 10
+  level:
+    root: info
+    org.msa.eurekaserver: debug
+    
+spring:
+  application:
+    name: eureka-server
+server:
+   port: 8761
+eureka:
+  instance:
+    hostname: eureka-server
+  client:
+    register-with-eureka: false                                                    # eureka서버에 서버관련 정보를 등록여부
+    fetch-registry: false                                                          # registry에 저장된 내용을 로컬로 캐싱해서 출력여부
+    serviceUrl:
+      defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/       # Eureka서버의 URL정보를 세팅
+  server:
+    enable-self-preservation: false
+    eviction-interval-timer-in-ms: 60000
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
