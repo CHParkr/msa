@@ -5,9 +5,12 @@ logging:
     max-history: 10
   level:
     root: info
-    org.msa.item: debug
+    org.msa.gatewayserver: debug
     
 spring:
+  config:
+    import:
+      - classpath:/config/datasource-local.yml
   cloud:
     gateway:
       routes:                                                                          # 요청 URI에 대해 마이크로서비스로 요청데이터 전달
