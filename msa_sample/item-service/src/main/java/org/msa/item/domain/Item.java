@@ -20,6 +20,9 @@ public class Item {
 	@Column(name ="ID", length = 10)
 	private String id;
 	
+	@Column(name ="ACCOUNT_ID")
+	private String accountId;
+	
 	@Column(name ="NAME", length = 20)
 	private String name;
 	

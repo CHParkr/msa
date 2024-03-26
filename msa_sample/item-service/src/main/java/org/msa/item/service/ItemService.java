@@ -15,12 +15,13 @@ import lombok.RequiredArgsConstructor;
 public class ItemService {
 	private final ItemRepository itemRepository;
 	
-	public void insertItem(ItemDTO itemDTO) {
+	public void insertItem(ItemDTO itemDTO, String accountId) {
 		SimpleDateFormat form = new SimpleDateFormat("yyyyMMddHHmmss");
 		String date = form.format(new Date());
 		
 		Item item = Item.builder()
 						.id(itemDTO.getId())
+						.accountId(accountId)
 						.name(itemDTO.getName())
 						.description(itemDTO.getDescription())
 						.itemType(itemDTO.getItemType())
