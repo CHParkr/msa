@@ -1,0 +1,22 @@
+server:
+  #port: 5000
+  port: 0                                                               # 자동으로 랜덤한 포트로 사용
+
+spring:
+  application:
+    name: item-service
+  profiles:
+    active: docker
+  cloud:
+    config:
+      url: http://config-server:8888
+    loadbalancer:
+      ribbon:
+        enabled: false
+
+# actuator 기능 정의
+management:
+  endpoints:
+    web:
+      exposure:
+        include: refresh, health, beans                                 # refresh : 재기동없이 설정적용

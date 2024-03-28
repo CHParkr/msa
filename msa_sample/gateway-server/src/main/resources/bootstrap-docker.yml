@@ -1,0 +1,23 @@
+server:
+  port: 8070
+spring:
+  application:
+    name: gateway-server
+  profiles:
+    active: docker
+  cloud:
+    config:
+      url: http://config-server:8888
+    loadbalancer:
+      ribbon:
+        enabled: false
+
+# actuator 기능 정의
+management:
+  endpoints:
+    web:
+      exposure:
+        include: refresh, health, beans, gateway # refresh : 재기동없이 설정적용
+  endpoint:
+    gateway:
+      enable: true

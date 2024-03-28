@@ -1,0 +1,31 @@
+logging:
+  file:
+    name: logs/gateway.log
+    max-size: 500MB
+    max-history: 10
+  level:
+    root: info
+    org.msa.gatewayserver: debug
+    
+spring:
+  config:
+    import:
+      - classpath:/config/datasource-docker.yml
+  cloud:
+    gateway:
+      routes:                                                                          # 요청 URI에 대해 마이크로서비스로 요청데이터 전달
+        - id: item-service                                                             # 라우팅 구별을 위한 식별 id 
+          uri: lb://item-service                                                       # 이동할 마이크로서비스명
+          predicates:                                                                  # 실제요청 들어온 URL 주소
+            - Path=/v1/item/**
+    
+
+# 마이크로서비스 등록
+eureka:
+  instance:
+    prefer-ip-address: true                                                          # IP주소를 이용하여 eureka 서버등록
+  client:
+    register-with-eureka: true                                                       # eureka에 등록여부
+    fetch-registry: true                                                             # registry에 저장된 내용을 캐시해서 출력여부
+    service-url:
+      defaultZone: http://eureka-server:8761/eureka/
