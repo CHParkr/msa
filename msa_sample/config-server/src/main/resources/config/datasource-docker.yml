@@ -1,11 +1,25 @@
+#spring:
+#  datasource:
+#    driver-class-name: com.mariadb.jdbc.Driver
+#    url: jdbc:mysql://mariadb:3306/msa?characterEncoding=UTF-8
+#    username: root
+#    password: '{cipher}1c13d3d57913637a9b6a5cb54656f2a9b6055e6a12c70b100e76ee7e14c87a29'
+#  jpa:
+#    database-platform: org.hibernate.dialect.MariaDB103Dialect
+#    show-sql: true
+#    open-in-view: false
+#    hibernate:
+#      format_sql: true
+#      ddl-auto: create
+
 spring:
   datasource:
-    driver-class-name: com.mariadb.jdbc.Driver
-    url: jdbc:mysql://mariadb:3306/msa?characterEncoding=UTF-8
-    username: root
-    password: '{cipher}1c13d3d57913637a9b6a5cb54656f2a9b6055e6a12c70b100e76ee7e14c87a29'
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:53306/msa?characterEncoding=UTF-8
+    username: msar
+    password: '{cipher}75513d30417aff430cb8a322b6d22dac49a0a891a61657fc2890dedfd5686023'
   jpa:
-    database-platform: org.hibernate.dialect.MariaDB103Dialect
+    database-platform: org.hibernate.dialect.MySQL8Dialect
     show-sql: true
     open-in-view: false
     hibernate:

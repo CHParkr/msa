@@ -8,8 +8,9 @@ COPY build.gradle .
 COPY settings.gradle .
 COPY src src
 
-RUN rm src/main/resources/bootstrap.yml
+RUN rm src/main/resources/bootstrap.yml 
 RUN mv src/main/resources/bootstrap-docker.yml src/main/resources/bootstrap.yml
+RUN echo "please"
 
 # 권한부여
 RUN chmod +x ./gradlew
@@ -21,9 +22,9 @@ RUN dos2unix ./gradlew
 RUN ./gradlew bootJAR
 
 
-
 # jdk 실행환경
 FROM openjdk:18-jdk-alpine
+
 # home 경로 지정
 WORKDIR /app
 

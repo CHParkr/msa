@@ -9,3 +9,6 @@ spring:
     loadbalancer:
       ribbon:
         enabled: false
+        
+server:
+  port: 8761
